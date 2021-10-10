@@ -1,14 +1,52 @@
+const path = require('path');
 module.exports = {
-    // 1. Especificamos el archivo de entrada
+    // 1. Estableciendo el modo de ejecución
+    mode: 'development',
+    // 2. Se crea el archivo de entrada
     entry: './client/index.js',
-    // 2.Especificaremos el archivo de salida
+    // 3. Especificando el archivo de salida
     output:{
-        // 3. Ruta absoluta de salida
-        path:'/public',
-        // 4. Nombre del archivo de salida
-        filename: 'bundle.js'
-     },
-     devServer :{
-         static: './public'
-     }
+        // 4. Ruta absoluta de salida
+        path: path.join(__dirname, 'public'),
+        // 5. Nombre del archivo de salida
+        filename: 'js/bundle.js'
+        // 6. Ruta del path publica para fines del servidor de desarrollo
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use:[
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets:[
+                                [
+                                    '@babel/preset-env',
+                                    {
+                                        'modules': false,
+                                        'useBuiltIns': 'usage',
+                                        'targets': {"chrome": "80"},
+                                        'corejs': 3
+                                    }
+                                ]
+                            ],
+                            "plugins": [
+                                [
+                                    "module-resolver",
+                                    {
+                                        "root": ["./"],
+                                        "alias": {
+                                            "@client" : "./client",
+                                        }
+                                    }
+                                ]
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
     }
+}
