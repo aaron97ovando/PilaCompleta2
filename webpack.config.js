@@ -1,27 +1,29 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
-    // 1. Estableciendo el modo de ejecución
+    // 1. Se estrablece modo desarrollo
     mode: 'development',
-    // 2. Se crea el archivo de entrada
+    // 2. Especificar archivo entrada
     entry: './client/index.js',
-    // 3. Especificando el archivo de salida
-    output:{
-        // 4. Ruta absoluta de salida
+    // 3. Salida de empaquetado
+    output: {
+        // 4. Ruta absoluta salida
         path: path.join(__dirname, 'public'),
-        // 5. Nombre del archivo de salida
-        filename: 'js/bundle.js'
-        // 6. Ruta del path publica para fines del servidor de desarrollo
+        // 5. Nombre archivo salida
+        filename: 'js/bundle.js',
+        // 6. Servidor desarrollo, ruta path publico 
+        publicPath: '/'
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.js$ /,
                 exclude: /(node_modules|bower_components)/,
-                use:[
+                use: [
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets:[
+                            presets: [
                                 [
                                     '@babel/preset-env',
                                     {
@@ -37,7 +39,7 @@ module.exports = {
                                     "module-resolver",
                                     {
                                         "root": ["./"],
-                                        "alias": {
+                                        "alias":{
                                             "@client" : "./client",
                                         }
                                     }
@@ -46,7 +48,16 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.css$ /,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'styles/app.css'
+        })
+    ]
 }

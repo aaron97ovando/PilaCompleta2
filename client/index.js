@@ -1,4 +1,7 @@
-console.log('Webpack Esta trabajando!!!');
+import './stylesheets/style.css'
+import './stylesheets/mystyles.css'
+
+console.log("Webpack Working!!!");
 // Default parameters Es6/2015
 let show = (m = "hola") => {
     alert(m)
