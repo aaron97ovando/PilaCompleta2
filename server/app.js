@@ -7,7 +7,46 @@ import logger from 'morgan';
 import indexRouter from '@s-routes/index';
 import usersRouter from '@s-routes/users';
 
+//Webpack modules
+import webpack from 'webpack';
+import WebpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
+
+//Importar configuración
+import webpackConfig from '../webpack.dev.config';
+import webpackDevConfig from '../webpack.dev.config';
+
+//Consultar modo en que se está ejecutando la ap
+const env = process.env.NODE_ENV ||'development';
+
+//Se crea la aplicación express (servidor software)
 var app = express();
+
+//Verificando el modo de ejecución de la ap
+if(env === 'development'){
+  console.log('>Excecuting in Development Mode: Webpcak Hot Reloading');
+  //1.- Agregando la ruta del HOT MODULE REPLACING
+  //reload=true habilita la recarga del frontend o servicios estáticos cuando hay
+  //cambios en el código fuente del frontend
+  //timeout=1000 tiempo de espera entre recargs y recarga
+  webpackConfig.entry = ['webpack-hot-middleware/client?reload=true&timeout=1000', webpackConfig.entry];
+
+  //2.- Agregar el plugin
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+  //3.- Crear compilador de webpack
+  const compiler = webpack(webpackConfig);
+
+  //4.- Agregar middleware a la cadena de middlewares de la apl
+  app.use(WebpackDevMiddleware(compiler, {
+    publicPath: webpackDevConfig.output.publicPath
+  }));
+
+  //5.- Agregar el webpack hot middleware
+  app.use(WebpackHotMiddleware(compiler));
+}else{
+  console.log('>Excecuting in Production Mode...');
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
