@@ -1,5 +1,9 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// Importación de eslint
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
+
 module.exports = {
     // 1. Se estrablece modo desarrollo
     mode: 'development',
@@ -63,6 +67,7 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'styles/app.css'
-        })
+        }),
+        new EslintWebpackPlugin()
     ]
 }
