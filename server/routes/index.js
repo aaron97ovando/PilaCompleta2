@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', author: 'Ovando Rodriguez Joaquin Aaron', 
+  res.render('index', { title: 'Express', author: 'Ovando Rodriguez Joaquin Aaron',
   appName:'WebApp', company: 'Pila Completa 2' });
 });
 
