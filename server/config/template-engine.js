@@ -1,5 +1,6 @@
 import ExpHbs from 'express-handlebars';
 import path from 'path';
+
 // Exportando una función de configuración
 export default (app) => {
   // 1. Registrar el motor de plantillas

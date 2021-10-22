@@ -11,5 +11,5 @@ router.get('/', function(req, res, next) {
 router.get('/greeting', function(req, res, next){
   res.send('Hola Como esta la Clase De Fullstack Web')
 })
-  
+
 module.exports = router;

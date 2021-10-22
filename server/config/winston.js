@@ -1,18 +1,18 @@
 /* eslint-disable prettier/prettier */
 // Importando a winston
-import winston, { format } from "winston";
-import appRoot from "app-root-path";
+import winston, { format } from 'winston';
+import appRoot from 'app-root-path';
 
 // Componentes para crear el formato personalizado
 const { combine, colorize, timestamp, printf, uncolorize, json } = format;
 //
 // Creando el perfil de color para el log
 const colors = {
-  error: "red",
-  warn: "yellow",
-  info: "green",
-  http: "magenta",
-  debug: "green",
+  error: 'red',
+  warn: 'yellow',
+  info: 'green',
+  http: 'magenta',
+  debug: 'green',
 };
 // Agregando el perfil a winston
 winston.addColors(colors);
@@ -29,7 +29,7 @@ const myFileFormat = combine(uncolorize(), timestamp(), json());
 // Creando objetos de configuración
 const option = {
   infoFile: {
-    level: "info",
+    level: 'info',
     filename: `${appRoot}/server/logs/infos.log`,
     handleExceptions: true,
     maxSize: 5242880, // 5MB
@@ -37,7 +37,7 @@ const option = {
     format: myFileFormat,
   },
   warnFile: {
-    level: "warn",
+    level: 'warn',
     filename: `${appRoot}/server/logs/warn.log`,
     handleExceptions: true,
     maxSize: 5242880, // 5MB
@@ -45,7 +45,7 @@ const option = {
     format: myFileFormat,
   },
   errorFile: {
-    level: "error",
+    level: 'error',
     filename: `${appRoot}/server/logs/errors.log`,
     handleExceptions: true,
     maxSize: 5242880, // 5MB
@@ -53,7 +53,7 @@ const option = {
     format: myFileFormat,
   },
   console: {
-    level: "debug",
+    level: 'debug',
     handleExceptions: true,
     format: myFormat,
   },
@@ -67,7 +67,8 @@ const logger = winston.createLogger({
     new winston.transports.File(option.errorFile),
     new winston.transports.File(option.console),
   ],
-  exitOnError: false, // No finaliza en excepciones manejadas
+  exitOnError: false, 
+  // No finaliza en excepciones manejadas
 });
 
 //
