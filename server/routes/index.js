@@ -1,15 +1,15 @@
-var express = require('express');
-var router = express.Router();
+// Importando el router home
+import homeRouter from './home';
+// Importando router user
+import userRouter from './user';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', author: 'Ovando Rodriguez Joaquin Aaron',
-  appName:'WebApp', company: 'Pila Completa 2' });
-});
+// Agregando Rutas a app
+const addRoutes = (app) => {
+  app.use('/', homeRouter);
+  app.use('/user', userRouter);
+  return app;
+};
 
-/* Agregaremos una ruta */
-router.get('/greeting', function(req, res, next){
-  res.send('Hola Como esta la Clase De Fullstack Web')
-})
-
-module.exports = router;
+export default {
+  addRoutes,
+};

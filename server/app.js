@@ -1,4 +1,8 @@
-/* eslint-disable no-console */
+/* eslint-disable prettier/prettier */
+/* eslint-disable spaced-comment */
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-console*/
+// eslint-disable-next-line prettier/prettier
 import createError from 'http-errors';
 import express from 'express';
 import path from 'path';
@@ -6,72 +10,56 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import winston from '@server/config/winston';
 
-import indexRouter from '@s-routes/index';
-import usersRouter from '@s-routes/users';
+// Importando router principal
+import router from '@server/routes/index';
 
-// Importing configurations
+//importing configurations
 import configTemplateEngine from '@s-config/template-engine'
-
-// Webpack Modules
+//importar modulos de webpack
 import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
+import WebpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
 import webpackDevConfig from '../webpack.dev.config';
-
-// Consultar el modo en que se esta ejecutando la aplicaciom
+//consultar modo en que se ejecuta la aplicacion
 const env = process.env.NODE_ENV || 'developement';
-
-// Se crea la aplicación express
+//creacion aplicacion express
 const app = express();
-
-// Verificando el modo de ejecución de la aplicación
-if (env === 'development') {
-  console.log('> Excecuting in Development Mode: Webpack Hot Reloading');
-  // Paso 1. Agregando la ruta del HMR
-  // reload=true: Habilita la recarga del frontend cuando hay cambios en el codigio
-  // fuente del frontend
-  // timeout=1000: Tiempo de espera entre recarga y recarga de la pagina
-  webpackDevConfig.entry = [
-    'webpack-hot-middleware/client?reload=true&timeout=1000',
-    webpackDevConfig.entry,
-  ];
-
-  // Paso 2. Agregamos el plugin
+//verficiar modo ejecucion de la aplicacion
+if(env === 'development'){
+  console.log('> Excecuting in Development Mode: Webpack hot Reloading');
+  //ruta del Hot module replasmen
+  //reload=true: habilita recarga fronted al tener cambios en codigo fuente del fronted
+  //timeout=1000: Tiempo espera recarga
+  webpackDevConfig.entry = ['Webpack-hot-middleware/client?reload=true&timeout=1000', webpackDevConfig.entry];
+  //Agregar plugin
   webpackDevConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-
-  // Paso 3. Crear el compilador de webpack
+  //compilador
   const compiler = webpack(webpackDevConfig);
-
-  // Paso 4. Agregando el Middleware a la cadena de Middlewares
-  // de nuestra aplicación
-  app.use(
-    webpackDevMiddleware(compiler, {
-      publicPath: webpackDevConfig.output.publicPath,
-    }),
-  );
-  // Paso 5. Agregando el Webpack Hot middleware
-  app.use(webpackHotMiddleware(compiler));
-} else {
-  console.log('> Excecuting in Production Mode...');
+  //Agregando middleware a cadena
+  app.use(WebpackDevMiddleware(compiler,{
+  publicPath: webpackDevConfig.output.publicPath
+}));
+// webpack hot middleware
+  app.use(WebpackHotMiddleware(compiler));
+}else{
+  console.log('> Excecuting in Production Mode... ');
 }
 // view engine setup
 configTemplateEngine(app);
-
-app.use(morgan('combined', { stream: winston.stream }));
-app.use(morgan('dev', { stream: winston.stream }));
+app.use(morgan('dev', { stream : winston.stream }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '..', 'public')));
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(express.static(path.join(__dirname, "..", 'public')));
+
+// Instalando enrutator principal a 
+// aplicacion express
+router.addRoutes(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   // Log
-  winston.error(
-    `Code: 404, Message: Page Not Found, URL: ${req.originalUrl}, Method: ${req.method}`,
-  );
+  winston.error(`Code: 404 Message: Page Not Found, URL: ${req.originalUrl}, Method: ${req.method}`);
   next(createError(404));
 });
 
@@ -80,14 +68,8 @@ app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // Loggeando con Winston
-  winston.error(
-    `status: ${err.status || 500}, Message: ${err.message}, Method: ${
-      req.method
-    }, IP:${req.ip}`,
-  );
-
+  // Loggeando con winston
+  winston.error(`status: ${err.status || 500}, Message: ${err.message}, Method: ${req.method}, IP: ${req.ip}`);
   // render the error page
   res.status(err.status || 500);
   res.render('error');
