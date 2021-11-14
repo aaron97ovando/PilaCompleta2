@@ -4,18 +4,18 @@ const index = (req, res) => {
   });
 };
 -
-  function greeting(req, res) {
-    res.status(200).json({
-      message: 'Hola Campeon de la Fullstack Web',
-    });
-  }
+  const greeting = (req, res) => {
+  res.status(200).json({
+    message: 'Hola Campeon de la Fullstack Web',
+  });
+};
 -
- function about(req, res) {
-    res.render('home/about', { title: 'Acerca de projnotes' });
+  function about(req, res) {
+    res.render('home/about', { appVersion: '0.0.1' });
   }
--
-  export default {
+
+export default {
   index,
   greeting,
   about,
-}
+};
