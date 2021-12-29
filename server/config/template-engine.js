@@ -1,7 +1,8 @@
+/* eslint-disable prettier/prettier */
 import ExpHbs from 'express-handlebars';
 import path from 'path';
 
-// Exportando una función de configuración
+// Exportando una funcion de configuracion
 export default (app) => {
   // 1. Registrar el motor de plantillas
   app.engine(
@@ -9,12 +10,14 @@ export default (app) => {
     ExpHbs({
       extname: '.hbs',
       defaultLayout: 'main',
-    })
+    }),
   );
-  // 2. Seleccionar el motor de plantillas recien registrado
+
+  // 2. Seleccionar Motor de plantillas registrado
   app.set('view engine', 'hbs');
   // 3. Estableciendo la ruta de las vistas
   app.set('views', path.join(__dirname, '..', 'views'));
-  // Retorna el valor de entrada
+
+  // Retornamos el valor de entrada
   return app;
-}
+};

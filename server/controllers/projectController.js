@@ -1,13 +1,16 @@
-//Action methods "/projects" "/projects/index"
+// Action Methods
+// "/projects"
 const index = (req, res) => {
-    res.send('Respondiendo a "/projects/index"');
-  };
-  // "/projects/add"
-  const add = (req, res) => {
-    res.send('Respondiendo a "/projects/add"');
-  };
-  //pendiente por programar
-  export default {
-    add,
-    index,
-  };
+  res.send('Respondiendo a "/Projects/index"');
+};
+
+// "/projects/add"
+const add = (req, res) => {
+  res.send('Respondiendo a "/projects/add"');
+};
+
+// Pendiente por programar
+export default {
+  add,
+  index,
+};

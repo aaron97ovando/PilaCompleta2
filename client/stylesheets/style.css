@@ -1,6 +1,6 @@
-/* Evita error de identación en el sidenav */
+
 .sidenav li{
-  clear: both;
+  clear:both;
 }
 
 body {
@@ -11,4 +11,4 @@ body {
   a {
     color: #00B7FF;
   }
- 
+  

@@ -3,16 +3,16 @@ const index = (req, res) => {
     title: 'ProjNotes',
   });
 };
--
-  const greeting = (req, res) => {
+
+const greeting = (req, res) => {
   res.status(200).json({
-    message: 'Hola Campeon de la Fullstack Web',
+    message: 'Hola campeon FullStack',
   });
 };
--
-  function about(req, res) {
-    res.render('home/about', { appVersion: '0.0.1' });
-  }
+
+const about = (req, res) => {
+  res.render('home/about', { appVersion: '0.0.1' });
+};
 
 export default {
   index,

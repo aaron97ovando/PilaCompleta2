@@ -1,11 +1,10 @@
-///Importar paquete DotEnv
--
+// Importando el paquete DotEnv
 import dotenv from 'dotenv';
 
-//Cargar variables de entorno
+// Cargar las variables de entorno
 dotenv.config();
 
-//Exportar valores de configuración
+// Exportando valores e configuracion
 export default {
   homeUrl: `${process.env.APP_URL}:${process.env.PORT}`,
   port: process.env.PORT,

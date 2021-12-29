@@ -1,37 +1,22 @@
-//var express = require('express');
-//import { Router } from 'express';
-//Importar el router de Home
--
+// Importando el router home
 import homeRouter from './home';
-//Importando router de users
-import userRouter from './users';
-//const router = new Router();
-//Importando router de projects
+// Importando router user
+import userRouter from './user';
+// Importante route projects
 import projectRouter from './project';
 
-/* GET home page. */
-
-//router.use('/', homeRouter);
-//router.use('/user', userRouter);
-
-/*Agregar nueva ruta */
-//router.get('/Hola', function (req, res) {
-//res.status(200).json({ message: '¡Soy Lissete!' });
-//});
-//router.get('/hola',)
-
-//Agregando las rutas a la apl
+// Agregando Rutas a app
 const addRoutes = (app) => {
-  //Home routes
+  // home routes
   app.use('/', homeRouter);
-  //Project Routes
+  // project routes
   app.use('/projects', projectRouter);
-
+  // user routes
   app.use('/user', userRouter);
 
   return app;
 };
+
 export default {
   addRoutes,
 };
-//module.exports = router;

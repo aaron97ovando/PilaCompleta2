@@ -12,11 +12,11 @@
     [
       "module-resolver",
       {
-        "root" : ["./"],
-        "alias" : {
-          "@server" : "./server",
-          "@s-routes" : "./server/routes",
-          "@s-config" : "./server/config"
+        "root":["./"],
+        "alias": {
+          "@server":"./server",
+          "@s-routes":"./server/routes",
+          "@s-config":"./server/config"
         }
       }
     ]

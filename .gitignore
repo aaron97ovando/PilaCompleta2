@@ -1,7 +1,7 @@
 # Ingnorando las dependencias
 node_modules
 dist-server
-# Ignorando los archivos de logs
+# Ingnorando los archivos de logs
 logs
 *.logs
 # Ignorando archivo de configuracion

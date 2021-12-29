@@ -1,18 +1,17 @@
 // Importando a winston
--
+
 import winston, { format } from 'winston';
 
 import appRoot from 'app-root-path';
 
 // Componentes para crear el formato personalizado
 const { combine, timestamp, printf, uncolorize, colorize, json } = format;
-
-// Creando el Perfil de color para el log
+// Creando el Perfin de color para el log
 const colors = {
   error: 'red',
-  warn: 'yellow',
-  info: 'cyan',
-  http: 'blue',
+  warn: 'yelow',
+  info: 'green',
+  http: 'magenta',
   debug: 'green',
 };
 // Agregando el Perfil a winston
@@ -67,7 +66,7 @@ const logger = winston.createLogger({
     new winston.transports.Console(options.Console),
   ],
   exitOnError: false,
-  
+
 });
 // Manejo stream entrada
 logger.stream = {

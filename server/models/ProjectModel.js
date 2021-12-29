@@ -1,9 +1,9 @@
-//Importar librería mongoose
--
+// importar mongoose
 import * as mongoose from 'mongoose';
-//Destructuración para obtener Squema
+// destructuracion se squema
 import { Schema } from 'mongoose';
-//Creando el Schema
+
+// crea schema
 const ProjectSchema = new Schema({
   name: {
     type: String,
