@@ -2,7 +2,6 @@
 import * as mongoose from 'mongoose';
 // destructuracion se squema
 import { Schema } from 'mongoose';
-
 // crea schema
 const ProjectSchema = new Schema({
   name: {

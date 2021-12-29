@@ -1,23 +1,22 @@
-// Usando el patron factory para la creacion
-// de middlewares de validación
+// Usando el patron factoru para la creacion de middlewares de validación
 const Validator =
   ({ shape, getObject }) =>
   async (req, res, next) => {
-    // Construyendo el objeto validador
+    // construyendo el objeto validador
     const dataObject = getObject(req);
-    // Se realiza el proceso de validación
+    // Realizar Validación
     try {
-      // Se valida el objeto
+      // Se valida objeto
       const validData = await shape.validate(dataObject, { abortEarly: false });
-      // Se inyecta el objeto validado a la petición
+      // Inyectar objeto validado a peticion
       req.validData = validData;
-      // Se invoca al siguiente middleware de la cadena
-      return next();
+      // Se invoca siguiente middleware de cadena
     } catch (error) {
-      // En caso de error se regresa la info del error
-      return res.status(400).json({ error });
+      // En caso error agregar objeto en la peticion
+      req.errorData = error;
     }
+    return next();
   };
 
-// exportando el validador
+// Eportando validador
 export default Validator;
