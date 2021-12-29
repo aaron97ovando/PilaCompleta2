@@ -1,27 +1,21 @@
-// Action Methods
-// "/projects"
+// Actions Methods
+// "/projects" "/porjects/index"
 const index = (req, res) => {
-  res.send('Respondiendo a "/Projects/index"');
+  res.send('Respondiendo a "/projects/index"');
 };
-
-//  GET "/projects/add"
+// GET "/projects/add"
 // Enviar el formulario para crear nuevas ideas
-// de Proyectos
+// de proyectos
 const add = (req, res) => {
-  res.send('Respondiendo a "/projects/addView"');
+  res.render('project/addView');
 };
 
 // POST "/projects/add"
-// Procesa la informacion del formulario
-// req, res es el controlador de la funcion flecha
+
 const addPost = (req, res) => {
-  // Rescatando la informacion del formulario
-  // Apartados del formulario
-  const { name, description } = req.body;
-  res.json({
-    name,
-    description,
-  });
+  // Rescatando la información del formulario
+  const { validData: project } = req;
+  res.status(200).json(project);
 };
 
 // Pendiente por programar

@@ -5,7 +5,6 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./dist-server/bin/www",
     "dev": "cross-env NODE_ENV=development babel-watch --watch ./server/views ./server/bin/www",
-
     "w:s": "cross-env NODE_ENV=development webpack serve --config ./webpack.dev.config.js --mode development",
     "cleans": "rimraf dist-server",
     "cleanc": "rimraf public/js",
@@ -16,7 +15,6 @@
   "dependencies": {
     "app-root-path": "^3.0.0",
     "cookie-parser": "~1.4.4",
-    
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
@@ -27,8 +25,8 @@
     "morgan": "~1.9.1",
     "nodeenv": "^3.0.71",
     "rimraf": "^3.0.2",
-
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
